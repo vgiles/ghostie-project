@@ -24,7 +24,7 @@ func get_input():
 		velocity = input_direction * SPEED
 	else:
 		animated_sprite_2d.play("idle")
-
+		velocity *= 0.85
 	
 	#if input_direction.x == 0 and input_direction.y == 0: attempting to move sprite in idle state by script
 		#animated_sprite_2d.offset.y += 10

@@ -4,6 +4,10 @@
 [ext_resource type="Script" path="res://scripts/pc_ghostie_input.gd" id="1_tbi78"]
 [ext_resource type="Texture2D" uid="uid://b7jiw38yrp2w" path="res://assets/point-lights/2d_lights_and_shadows_neutral_point_light.webp" id="3_jqpa4"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_40si1"]
+radius = 7.0
+height = 16.0
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_nfh5n"]
 atlas = ExtResource("1_22y0g")
 region = Rect2(0, 0, 187, 176)
@@ -73,10 +77,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_40si1"]
-radius = 7.0
-height = 20.0
-
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ulii8"]
 polygon = PackedVector2Array(0, -79.2002, -46.7501, -61.6002, -46.7501, -17.6001, -85.7085, 61.6002, -38.9584, 52.8002, -15.5834, 79.2002, 31.1667, 61.6002, 54.5418, 26.4001, 77.9168, 0, 38.9584, -44.0001, 31.1667, -79.2002)
 
@@ -121,6 +121,9 @@ _data = {
 motion_mode = 1
 script = ExtResource("1_tbi78")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_40si1")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 1
 scale = Vector2(0.128342, 0.113636)
@@ -128,9 +131,6 @@ sprite_frames = SubResource("SpriteFrames_vpat7")
 animation = &"idle"
 autoplay = "idle"
 frame_progress = 0.711428
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_40si1")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 1.5
