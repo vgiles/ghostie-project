@@ -446,7 +446,6 @@ bus = &"music"
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="Environment"]
 color = Color(0, 0, 0, 1)
 energy = 1.27
-blend_mode = 2
 height = 1.0
 max_distance = 0.0
 
@@ -455,5 +454,6 @@ collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+light_mask = 0
 position = Vector2(312, 304)
 shape = SubResource("RectangleShape2D_h4wgs")
