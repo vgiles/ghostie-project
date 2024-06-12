@@ -1,0 +1,149 @@
+[gd_scene load_steps=18 format=3 uid="uid://duvtiul4twryo"]
+
+[ext_resource type="Texture2D" uid="uid://b65tvq6xw85qc" path="res://assets/char_sprites/ghostie-low-res.png" id="1_22y0g"]
+[ext_resource type="Script" path="res://scripts/pc_ghostie_input.gd" id="1_tbi78"]
+[ext_resource type="Texture2D" uid="uid://b7jiw38yrp2w" path="res://assets/point-lights/2d_lights_and_shadows_neutral_point_light.webp" id="3_jqpa4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nfh5n"]
+atlas = ExtResource("1_22y0g")
+region = Rect2(0, 0, 187, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hoatl"]
+atlas = ExtResource("1_22y0g")
+region = Rect2(187, 0, 187, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkllt"]
+atlas = ExtResource("1_22y0g")
+region = Rect2(374, 0, 187, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfhm7"]
+atlas = ExtResource("1_22y0g")
+region = Rect2(561, 0, 187, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rpsje"]
+atlas = ExtResource("1_22y0g")
+region = Rect2(748, 0, 187, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8rkl7"]
+atlas = ExtResource("1_22y0g")
+region = Rect2(935, 0, 187, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_muttk"]
+atlas = ExtResource("1_22y0g")
+region = Rect2(1122, 0, 187, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sxauc"]
+atlas = ExtResource("1_22y0g")
+region = Rect2(1309, 0, 187, 176)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vpat7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nfh5n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hoatl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fkllt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dfhm7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rpsje")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8rkl7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_muttk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sxauc")
+}],
+"loop": true,
+"name": &"move",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_40si1"]
+radius = 7.0
+height = 20.0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ulii8"]
+polygon = PackedVector2Array(0, -79.2002, -46.7501, -61.6002, -46.7501, -17.6001, -85.7085, 61.6002, -38.9584, 52.8002, -15.5834, 79.2002, 31.1667, 61.6002, 54.5418, 26.4001, 77.9168, 0, 38.9584, -44.0001, 31.1667, -79.2002)
+
+[sub_resource type="Animation" id="Animation_33xp3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ybskb"]
+resource_name = "idle_move"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(2.08165e-12, -10)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4vocf"]
+_data = {
+"RESET": SubResource("Animation_33xp3"),
+"idle_move": SubResource("Animation_ybskb")
+}
+
+[node name="pc_ghostie" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_tbi78")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+scale = Vector2(0.128342, 0.113636)
+sprite_frames = SubResource("SpriteFrames_vpat7")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.711428
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_40si1")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 1.5
+texture = ExtResource("3_jqpa4")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+scale = Vector2(0.128342, 0.113636)
+occluder = SubResource("OccluderPolygon2D_ulii8")
+occluder_light_mask = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimatedSprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_4vocf")
+}
+autoplay = "idle_move"
