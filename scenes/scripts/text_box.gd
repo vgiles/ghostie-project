@@ -7,7 +7,7 @@ extends CanvasLayer
 
 @onready var tween = get_tree().create_tween()
 
-const CHAR_READ_RATE = 0.05
+const CHAR_READ_RATE = 0.08
 
 enum State {
 	READY,
@@ -17,10 +17,10 @@ enum State {
 
 var current_state = State.READY
 
-@export var text_queue = []
+var text_queue = []
 
 func _ready():
-	#print("Starting state is State.READY")
+	print("Starting state is State.READY")
 	hide_textbox()
 	#display_text("Here is some text")
 	#queue_text("First text queued")
@@ -41,18 +41,14 @@ func display_text():
 	main_text.text = next_text
 	change_state(State.READING)
 	show_textbox()
-	if tween:
-		tween.kill()
-		tween = get_tree().create_tween()
-		tween.tween_property(main_text, "visible_ratio", 1.0, len(next_text) * CHAR_READ_RATE)
-		tween.connect("finished", on_tween_finished)
+	writing_tween(next_text)
 	#end_symbol = "_"
 
 func on_tween_finished():
 	end_symbol.text = "_"
 	change_state(State.FINISHED)
 	
-func _process(delta):
+func _process(_delta):
 	match current_state:
 		State.READY:
 			if !text_queue.is_empty():
@@ -65,6 +61,7 @@ func _process(delta):
 				change_state(State.FINISHED)
 		State.FINISHED:
 			if Input.is_action_just_pressed("action"):
+				tween.kill()
 				change_state(State.READY)
 				if !text_queue.is_empty():
 					show_textbox()
@@ -73,14 +70,22 @@ func _process(delta):
 
 func change_state(next_state):
 	current_state = next_state
-	#match current_state:
-		#State.READY:
-			#print("Changing state to: State.READY")
-		#State.READING:
-			#print("Changing state to: State.READING")
-		#State.FINISHED:
-			#print("Changing state to: State.FINISHED")
+	match current_state:
+		State.READY:
+			print("Changing state to: State.READY")
+		State.READING:
+			print("Changing state to: State.READING")
+		State.FINISHED:
+			print("Changing state to: State.FINISHED")
 
 func push_text(next_text):
 	text_queue.push_back(next_text)
-	#print(text_queue)
+	print(text_queue)
+
+func writing_tween(next_text):
+	#var tween = get_tree().create_tween()
+	if tween:
+		tween.kill()
+	tween = get_tree().create_tween()
+	tween.tween_property(main_text, "visible_ratio", 1.0, len(next_text) * CHAR_READ_RATE)
+	tween.connect("finished", on_tween_finished)
