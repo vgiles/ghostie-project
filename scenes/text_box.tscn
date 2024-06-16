@@ -1,4 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dlg8uvpyvjwic"]
+[gd_scene load_steps=4 format=3 uid="uid://dlg8uvpyvjwic"]
+
+[ext_resource type="Script" path="res://scenes/scripts/text_box.gd" id="1_3dsx7"]
+[ext_resource type="FontFile" uid="uid://jrnwos2rr2vg" path="res://assets/fonts/monogram/ttf/monogram.ttf" id="1_xva5s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kuef1"]
 bg_color = Color(0, 0, 0, 0.560784)
@@ -13,8 +16,9 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [node name="TextBox" type="CanvasLayer"]
+script = ExtResource("1_3dsx7")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="textboxContainer" type="MarginContainer" parent="."]
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -27,6 +31,51 @@ theme_override_constants/margin_top = 35
 theme_override_constants/margin_right = 35
 theme_override_constants/margin_bottom = 35
 
-[node name="Panel" type="Panel" parent="MarginContainer"]
+[node name="Panel" type="Panel" parent="textboxContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_kuef1")
+
+[node name="MarginContainer" type="MarginContainer" parent="textboxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Panel" type="Panel" parent="textboxContainer/MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="textboxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="startSymbol" type="Label" parent="textboxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(7, 7)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("1_xva5s")
+theme_override_font_sizes/font_size = 80
+text = "*
+"
+
+[node name="mainText" type="Label" parent="textboxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(7, 7)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.580763, 0.580238, 0.40679, 1)
+theme_override_fonts/font = ExtResource("1_xva5s")
+theme_override_font_sizes/font_size = 70
+autowrap_mode = 2
+clip_text = true
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="endSymbol" type="Label" parent="textboxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(7, 7)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("1_xva5s")
+theme_override_font_sizes/font_size = 80
+text = "v
+"

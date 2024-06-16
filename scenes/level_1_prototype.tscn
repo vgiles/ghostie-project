@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dtikpby5y6120"]
+[gd_scene load_steps=13 format=3 uid="uid://dtikpby5y6120"]
 
 [ext_resource type="Texture2D" uid="uid://dg4c12lc4h0s1" path="res://assets/tilesets/sci-fi background4.png" id="1_0ofv3"]
 [ext_resource type="Texture2D" uid="uid://bhnhiniupgt6i" path="res://assets/tilesets/CosmicLilac_Tiles.png" id="1_6na6u"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://copio2xvjcjx7" path="res://assets/tilesets/sci-fi background1.png" id="1_rpgr0"]
 [ext_resource type="Texture2D" uid="uid://dmjppeweo4ryt" path="res://assets/tilesets/sci-fi background5.png" id="2_f8bve"]
 [ext_resource type="AudioStream" uid="uid://njrswmkvpfw5" path="res://assets/music/2024 - 7.mp3" id="6_w141p"]
+[ext_resource type="Script" path="res://scenes/scripts/CollisionShape2D.gd" id="8_4uu2g"]
+[ext_resource type="PackedScene" uid="uid://dlg8uvpyvjwic" path="res://scenes/text_box.tscn" id="9_1t75h"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2laik"]
 texture = ExtResource("1_6na6u")
@@ -434,6 +436,9 @@ scale = Vector2(1.59069, 1.59069)
 zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
 
+[node name="TextBox" parent="pc_ghostie/Camera2D" instance=ExtResource("9_1t75h")]
+unique_name_in_owner = true
+
 [node name="Environment" type="Node" parent="."]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Environment"]
@@ -457,3 +462,4 @@ collision_mask = 2
 light_mask = 0
 position = Vector2(312, 304)
 shape = SubResource("RectangleShape2D_h4wgs")
+script = ExtResource("8_4uu2g")
