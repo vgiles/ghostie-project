@@ -5,9 +5,11 @@ extends CanvasLayer
 @onready var main_text = $textboxContainer/MarginContainer/HBoxContainer/mainText
 @onready var end_symbol = $textboxContainer/MarginContainer/HBoxContainer/endSymbol
 
-@onready var tween = get_tree().create_tween()
+#@onready var tween = get_tree().create_tween()
+@onready var tween
 
-const CHAR_READ_RATE = 0.08
+
+const CHAR_READ_RATE = 0.03
 
 enum State {
 	READY,
@@ -20,7 +22,7 @@ var current_state = State.READY
 var text_queue = []
 
 func _ready():
-	print("Starting state is State.READY")
+	#print("Starting state is State.READY")
 	hide_textbox()
 	#display_text("Here is some text")
 	#queue_text("First text queued")
@@ -70,22 +72,23 @@ func _process(_delta):
 
 func change_state(next_state):
 	current_state = next_state
-	match current_state:
-		State.READY:
-			print("Changing state to: State.READY")
-		State.READING:
-			print("Changing state to: State.READING")
-		State.FINISHED:
-			print("Changing state to: State.FINISHED")
+	#match current_state:
+		#State.READY:
+			#print("Changing state to: State.READY")
+		#State.READING:
+			#print("Changing state to: State.READING")
+		#State.FINISHED:
+			#print("Changing state to: State.FINISHED")
 
 func push_text(next_text):
 	text_queue.push_back(next_text)
-	print(text_queue)
+	#print(text_queue)
 
 func writing_tween(next_text):
 	#var tween = get_tree().create_tween()
 	if tween:
 		tween.kill()
+		main_text.visible_ratio = 0.0
 	tween = get_tree().create_tween()
 	tween.tween_property(main_text, "visible_ratio", 1.0, len(next_text) * CHAR_READ_RATE)
 	tween.connect("finished", on_tween_finished)
