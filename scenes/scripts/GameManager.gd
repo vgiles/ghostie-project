@@ -2,7 +2,7 @@ extends Node
 
 var dialogue_manager = {
 	"clue_1" : {
-		"text": "Blah",
+		"text": "I remember. I remember...? I remember imagining entire worlds, entire futures. I remember having hope",
 		"is_seen": false,
 	},
 }
