@@ -1,8 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://cyg1l045cccsp"]
 
-[ext_resource type="Script" path="res://scripts/dialogue_body.gd" id="1_d4wen"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nygf5"]
+size = Vector2(60, 20)
 
 [node name="DialogueBody" type="Area2D"]
-script = ExtResource("1_d4wen")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_nygf5")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
