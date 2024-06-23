@@ -1,5 +1,5 @@
 extends CollisionShape2D
-@onready var game_manager = $"../../GameManager"
+@onready var game_manager = %GameManager
 @onready var text_box = %TextBox
 
 # Implement action button
