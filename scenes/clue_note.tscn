@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dldftdyn5jnaa"]
+
+[ext_resource type="Texture2D" uid="uid://clhrdo3yv4r2d" path="res://assets/enviro_sprites/note_sprite.png" id="1_kfta0"]
+
+[node name="clue_note" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_kfta0")

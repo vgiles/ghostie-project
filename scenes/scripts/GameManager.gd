@@ -1,8 +1,24 @@
 extends Node
 
 var dialogue_manager = {
-	"clue_1" : {
-		"text": "I remember. I remember...? I remember imagining entire worlds, entire futures. I remember having hope",
+	"area_clue_1" : {
+		"text": "I remember.",
+		"is_seen": false,
+	},
+	"area_clue_2" : {
+		"text" : "I remember..._I remember imagining.",
+		"is_seen": false,
+	},
+	"area_clue_3" : {
+		"text" : "I hate th– hated the world we created._Hated the selfishness, the destruction, the alienation.",
+		"is_seen": false,
+	},
+	"area_clue_4" : {
+		"text" : "I remember friends playing together,_imagining alternative worlds and alternative futures,_bringing them to life in their imagination.",
+		"is_seen": false,
+	},
+	"area_clue_letter_1" : {
+		"text": "Dearest,_You are not what you think._Something something something.",
 		"is_seen": false,
 	},
 }

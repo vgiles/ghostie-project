@@ -1,6 +1,7 @@
 extends Area2D
+@onready var game_manager = %GameManager
 @onready var text_box = %TextBox
-@onready var game_manager = $"../GameManager"
+
 
 func _on_body_entered(body):
 	if game_manager.dialogue_manager.area_clue_1.is_seen == false:

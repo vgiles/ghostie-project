@@ -3,14 +3,14 @@
 [ext_resource type="Texture2D" uid="uid://dg4c12lc4h0s1" path="res://assets/tilesets/sci-fi background4.png" id="1_0ofv3"]
 [ext_resource type="Texture2D" uid="uid://bhnhiniupgt6i" path="res://assets/tilesets/CosmicLilac_Tiles.png" id="1_6na6u"]
 [ext_resource type="PackedScene" uid="uid://duvtiul4twryo" path="res://scenes/pc_ghostie.tscn" id="1_20dj7"]
-[ext_resource type="Script" path="res://scripts/level_1_dialogue.gd" id="1_bakho"]
 [ext_resource type="Texture2D" uid="uid://copio2xvjcjx7" path="res://assets/tilesets/sci-fi background1.png" id="1_rpgr0"]
 [ext_resource type="Texture2D" uid="uid://dmjppeweo4ryt" path="res://assets/tilesets/sci-fi background5.png" id="2_f8bve"]
 [ext_resource type="Script" path="res://scenes/scripts/GameManager.gd" id="2_rgaxf"]
 [ext_resource type="AudioStream" uid="uid://njrswmkvpfw5" path="res://assets/music/2024 - 7.mp3" id="6_w141p"]
-[ext_resource type="Script" path="res://scenes/scripts/dialogue_area_1.gd" id="8_vubnj"]
 [ext_resource type="PackedScene" uid="uid://dlg8uvpyvjwic" path="res://scenes/text_box.tscn" id="9_1t75h"]
-[ext_resource type="PackedScene" uid="uid://cyg1l045cccsp" path="res://scenes/dialogue_body.tscn" id="9_gqxjp"]
+[ext_resource type="PackedScene" uid="uid://dldftdyn5jnaa" path="res://scenes/clue_note.tscn" id="12_pwe1o"]
+[ext_resource type="Script" path="res://scripts/clue_note.gd" id="13_o3cr8"]
+[ext_resource type="Script" path="res://scripts/cluenote1.gd" id="14_5immk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2laik"]
 texture = ExtResource("1_6na6u")
@@ -387,13 +387,13 @@ occlusion_layer_0/sdf_collision = true
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_2laik")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bu3rc"]
-size = Vector2(46, 5.5)
+[sub_resource type="CircleShape2D" id="CircleShape2D_egmiv"]
+radius = 738.233
 
 [node name="level-1-prototype" type="Node2D"]
-script = ExtResource("1_bakho")
 
 [node name="GameManager" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("2_rgaxf")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -453,18 +453,25 @@ bus = &"music"
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="Environment"]
 color = Color(0, 0, 0, 1)
 energy = 1.27
-blend_mode = 2
 height = 1.0
 max_distance = 0.0
-
-[node name="DialogueBody" parent="." instance=ExtResource("9_gqxjp")]
-script = ExtResource("8_vubnj")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueBody"]
-position = Vector2(312, 291.25)
-shape = SubResource("RectangleShape2D_bu3rc")
 
 [node name="TextBox" parent="." instance=ExtResource("9_1t75h")]
 unique_name_in_owner = true
 layer = 6
 follow_viewport_scale = 0.5
+
+[node name="clue_note" parent="." instance=ExtResource("12_pwe1o")]
+position = Vector2(-187, 439)
+scale = Vector2(0.0393063, 0.0393063)
+collision_layer = 9
+collision_mask = 8
+script = ExtResource("13_o3cr8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="clue_note"]
+shape = SubResource("CircleShape2D_egmiv")
+script = ExtResource("14_5immk")
+
+[connection signal="area_entered" from="clue_note" to="clue_note" method="_on_area_entered"]
+[connection signal="body_entered" from="clue_note" to="clue_note" method="_on_body_entered"]
+[connection signal="body_entered" from="clue_note" to="clue_note/CollisionShape2D" method="_on_clue_note_body_entered"]
