@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://duvtiul4twryo" path="res://scenes/pc_ghostie.tscn" id="1_20dj7"]
 [ext_resource type="Texture2D" uid="uid://copio2xvjcjx7" path="res://assets/tilesets/sci-fi background1.png" id="1_rpgr0"]
 [ext_resource type="Texture2D" uid="uid://dmjppeweo4ryt" path="res://assets/tilesets/sci-fi background5.png" id="2_f8bve"]
-[ext_resource type="Script" path="res://scenes/scripts/GameManager.gd" id="2_rgaxf"]
+[ext_resource type="Script" path="res://scripts/GameManager.gd" id="2_rgaxf"]
 [ext_resource type="AudioStream" uid="uid://njrswmkvpfw5" path="res://assets/music/2024 - 7.mp3" id="6_w141p"]
 [ext_resource type="PackedScene" uid="uid://dlg8uvpyvjwic" path="res://scenes/text_box.tscn" id="9_1t75h"]
 [ext_resource type="PackedScene" uid="uid://dldftdyn5jnaa" path="res://scenes/clue_note.tscn" id="12_pwe1o"]
